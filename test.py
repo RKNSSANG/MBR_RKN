@@ -1,24 +1,15 @@
-# import networkx as nx
-# import matplotlib.pyplot as plt
-#
-# # 生成ER图
-# G = nx.erdos_renyi_graph(10, 0.4, seed=42)
-#
-# # 绘制ER图
-# nx.draw(G, with_labels=True)
-# plt.show()
-
 import networkx as nx
+import random
 import matplotlib.pyplot as plt
-
-n = 20
-k = 4
-p = 0.2
-ws = nx.watts_strogatz_graph(n, k, p)
-
-pos = nx.circular_layout(ws)
-nx.draw(ws, pos, with_labels=True)
-plt.show()
+r=0.1
+c_number=0
+rewardMat = {
+    'C': {'C': (1, 1), 'D': (1 - r, 1 + r)},
+    'D': {'C': (1 + r, 1 - r), 'D': (0, 0)}
+}
+# 创建一个 BA 图
+ba_graph = nx.barabasi_albert_graph(1000, 3)
+print(ba_graph[743])
 
 
 
