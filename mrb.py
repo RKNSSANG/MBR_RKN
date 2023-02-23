@@ -1,6 +1,8 @@
 import networkx as nx
 import random
 import matplotlib.pyplot as plt
+
+#使用networx重写，1. 循环终止条件 2. value各个相加  3.记忆长度可变
 r=0.1
 c_number=0
 rewardMat = {
@@ -23,6 +25,9 @@ for node in ba_graph.nodes():
 
 #更新
 
+#计算当前节点的收益
+def calValue():
+    
 
 
 
