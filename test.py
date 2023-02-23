@@ -9,27 +9,30 @@ def getReward(n):
     return value
 #使用networx重写，1. 循环终止条件 2. value各个相加  3.记忆长度可变
 #记忆长度是8
-memory_length=8
+memory_length=20
 #判断是否完全一致
 
-r=0.1
+r=0.001
 c_number=0
 rewardMat = {
     'C': {'C': (1, 1), 'D': (1 - r, 1 + r)},
     'D': {'C': (1 + r, 1 - r), 'D': (0, 0)}
 }
 # 创建一个 BA 图
-ba_graph = nx.barabasi_albert_graph(1000, 2)
+ba_graph = nx.barabasi_albert_graph(1024, 1)
 # 为每个节点分配随机的 C 或 D
 for node in ba_graph.nodes():
-    ba_graph.nodes[node]['state'] = random.choice(['C', 'D'])
-    ba_graph.nodes[node]['states']=['C','D','C','D']
+    ba_graph.nodes[node]['states']=[]
+    # ba_graph.nodes[node]['state'] = random.choice(['C', 'D'])
+    for i in range(memory_length):
+        ba_graph.nodes[node]['states'].append(random.choice(['C','D']))
+    ba_graph.nodes[node]['state'] =ba_graph.nodes[node]['states'][-1]
     ba_graph.nodes[node]['value'] = 0
     # ba_graph.nodes[node]['all_value'] = 0
-    if ba_graph.nodes[node]['state']=='C':
-        ba_graph.nodes[node]['states'].append('C')
-    elif ba_graph.nodes[node]['state']=='D':
-        ba_graph.nodes[node]['states'].append('D')
+    # if ba_graph.nodes[node]['state']=='C':
+    #     ba_graph.nodes[node]['states'].append('C')
+    # elif ba_graph.nodes[node]['state']=='D':
+    #     ba_graph.nodes[node]['states'].append('D')
 
 #计算当前每一个值
 # for node in ba_graph.nodes():
